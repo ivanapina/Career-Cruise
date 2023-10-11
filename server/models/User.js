@@ -25,6 +25,15 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
+  github: {
+    type: String,
+    required: false,
+    unique: true
+  },
+  linkedin: {
+    type: String,
+    required: false,
+  },
   company: {
     type: Boolean,
     required: true,
