@@ -16,7 +16,7 @@ const server = new ApolloServer({
 });
 
 //signup route 
-/*
+
 app.post('/register', async (req, res) => {
   const { firstName, lastName, email, password, company } = req.body;
 
@@ -73,7 +73,7 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-*/
+
 
 const startApolloServer = async () => {
   await server.start();
