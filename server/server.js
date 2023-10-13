@@ -3,17 +3,20 @@ const express = require('express');
 const User = require('./models/User'); 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const cors = require('cors');
+const db = require('./config/connection');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const { typeDefs, resolvers } = require('./schemas');
 
+const PORT = process.env.PORT || 3001;
 const app = express();
-const port = process.env.PORT || 3001;
-
-app.use(cors());
-app.use(bodyParser.json());
-
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
 //signup route 
-
+/*
 app.post('/register', async (req, res) => {
   const { firstName, lastName, email, password, company } = req.body;
 
@@ -70,7 +73,22 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+*/
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const startApolloServer = async () => {
+  await server.start();
+  
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+  
+  app.use('/graphql', expressMiddleware(server));
+
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    });
   });
+}
+
+startApolloServer();

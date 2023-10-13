@@ -1,0 +1,9 @@
+{
+    "name": "Career-Cruise",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "node ./server/server.js",
+        "dev": "nodemon ./server/server.js",
+        "seed": "node seeds/seed.js"
+    }
+}
