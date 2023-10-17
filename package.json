@@ -5,5 +5,8 @@
         "start": "node ./server/server.js",
         "dev": "nodemon ./server/server.js",
         "seed": "node seeds/seed.js"
+    },
+    "dependencies": {
+        "react-router-dom": "^6.17.0"
     }
 }
