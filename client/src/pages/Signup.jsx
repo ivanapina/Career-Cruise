@@ -1,8 +1,9 @@
+import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
-import { ADD_POST } from '../utils/mutations';
+import { ADD_PROFILE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
@@ -12,7 +13,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
-  const [addPost, { error, data }] = useMutation(ADD_POST);
+  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -30,11 +31,11 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data } = await addPost({
+      const { data } = await addProfile({
         variables: { ...formState },
       });
 
-      Auth.login(data.addPost.token);
+      Auth.login(data.addProfile.token);
     } catch (e) {
       console.error(e);
     }
@@ -77,6 +78,13 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <input 
+                className="form-input"
+                name="company"
+                type="checkbox" 
+                value={formState.company}
+                checked={this.state.chkbox} onChange={handleChange} 
+                />
                 <button
                   className="btn btn-block btn-info"
                   style={{ cursor: 'pointer' }}
@@ -100,4 +108,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
