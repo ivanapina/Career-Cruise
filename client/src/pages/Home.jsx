@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client';
-
+import React from 'react'
 import JobPosts from '../components/JobPosts';
 import { QUERY_POSTS } from '../utils/queries';
 
 const Home = () => {
-    
+
     const { loading, data } = useQuery(QUERY_POSTS);
     const posts = data?.posts || [];
   

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import React from 'react';
 const JobPosts = ({ posts, title }) => {
   if (!posts.length) {
     return <h3>No Job Posts Yet</h3>;
