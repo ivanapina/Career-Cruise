@@ -1,12 +1,13 @@
 //express server will go here
 const express = require('express');
-const User = require('./models/User'); 
+const User = require('./models/Profile'); 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { typeDefs, resolvers } = require('./schemas');
+const Profile = require('./models/Profile');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -18,29 +19,28 @@ const server = new ApolloServer({
 //signup route 
 
 app.post('/register', async (req, res) => {
-  const { firstName, lastName, email, password, company } = req.body;
+  const { userName, email, password, company } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingProfile = await Profile.findOne({ email });
 
-    if (existingUser) {
+    if (existingProfile) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const user = new User({
-      firstName,
-      lastName,
+    const profile = new Profile({
+      userName,
       email,
       password,
       company,
     });
 
     const saltRounds = 10;
-    user.password = await bcrypt.hash(password, saltRounds);
+    Profile.password = await bcrypt.hash(password, saltRounds);
 
-    await user.save();
+    await profile.save();
 
-    const token = jwt.sign({ userId: user._id }, 'secret-key', {
+    const token = jwt.sign({ profileId: profile._id }, 'secret-key', {
       expiresIn: '1h',
     });
 
@@ -57,13 +57,13 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const profile= await Profile.findOne({ email });
 
-    if (!user || !(await user.isCorrectPassword(password))) {
+    if (!profile || !(await profile.isCorrectPassword(password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ userId: user._id }, 'secret-key', {
+    const token = jwt.sign({ profileId: profile._id }, 'secret-key', {
       expiresIn: '1h',
     });
 
