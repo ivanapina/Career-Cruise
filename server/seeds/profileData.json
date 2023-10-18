@@ -1,0 +1,10 @@
+[
+    {
+        "bio": "likes to code",
+        "skills": ["NodeJS", "MySQL", "MongoDB", "React", "CSS-in-JS"]
+    },
+    {
+        "bio": "likes to code more",
+        "skills": ["NodeJS", "MySQL", "MongoDB", "React", "CSS-in-JS"]
+    }
+]

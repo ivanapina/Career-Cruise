@@ -1,0 +1,20 @@
+[
+    {
+        "firstName": "Maxwell",
+        "lastName": "Leuthner",
+        "email": "mleuthner2002@gmail.com",
+        "password": "1234567890",
+        "github": "https://github.com/Maxwell-Leu",
+        "linkedin": "NA",
+        "company": false
+    },
+    {
+        "firstName": "Paysen",
+        "lastName": "Lund",
+        "email": "mleuthner@gmail.com",
+        "password": "12345678",
+        "github": "https://github.com/Paysen1",
+        "linkedin": "NA",
+        "company": true
+    }
+]

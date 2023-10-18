@@ -5,6 +5,13 @@ const resolvers = {
     Query: {
         users: async () => {
             return await User.find({});
+        },
+        
+        posts: async () => {
+            return await Post.find({});
+        },
+        profiles: async () => {
+            return await Profile.find({});
         }
     }
 }
