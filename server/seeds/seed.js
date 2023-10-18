@@ -8,17 +8,20 @@ const profileData = require('./profileData.json');
 
 db.once('open', async () => {
     
-    //await cleanDB();
-    //await cleanDB();
-    //await cleanDB();
+    await cleanDB('User','users');
+    await cleanDB('Post','posts');
+    await cleanDB('Profile','profiles');
     await Profile.create(profileData);
     const profiles = await Profile.insertMany(profileData)
     const users = await User.insertMany(userData);
     const posts = await Post.insertMany(postData);
     
     for ( newUser of users ) {
-        const tempProfile = profileData[Math.floor(Math.random() * profiles.length)];
-        newUser.profile = tempProfile._id;
+        console.log('adding profile to user')
+        const tempProfile = profiles[Math.floor(Math.random() * profiles.length)];
+        newUser.profile = tempProfile;
+        console.log(newUser)
+        await newUser.save();
     }
 
 

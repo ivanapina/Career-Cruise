@@ -5,6 +5,7 @@ const typeDefs = `#graphql
     email: String
     github: String
     linkedin: String
+    profile: Profiles
   }
 
   type Posts{
@@ -23,7 +24,14 @@ const typeDefs = `#graphql
     profiles: [Profiles]
   }
 
+  type Auth{
+    toekn: ID!
+    user: User
+  }
+
   type Mutation {
+    addUser(firstName: String!,lastName: String!,email:String!,github:String!,linkedin:String!): Auth
+    login(email:String!,password:String!): Auth
     
   }
 `
