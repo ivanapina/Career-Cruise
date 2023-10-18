@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { ADD_PROFILE } from '../utils/mutations';
 
@@ -78,12 +77,13 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <p>Do you represent a company?</p>
                 <input 
                 className="form-input"
                 name="company"
                 type="checkbox" 
                 value={formState.company}
-                checked={this.state.chkbox} onChange={handleChange} 
+                onChange={handleChange} 
                 />
                 <button
                   className="btn btn-block btn-info"
