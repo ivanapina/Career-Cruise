@@ -7,6 +7,11 @@
         "seed": "node seeds/seed.js"
     },
     "dependencies": {
+
         "react-router-dom": "^6.17.0"
+=======
+        "@apollo/server": "^4.9.4",
+        "bcrypt": "^5.1.1"
+
     }
 }
