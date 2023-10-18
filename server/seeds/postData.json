@@ -1,6 +1,13 @@
 [
     {
-        "jobTitle": "Full stack dev",
-        "jobDescription": "do job"
+      "jobTitle": "Front-End Software Developer Needed",
+      "jobDescription": "We are looking for an entry level software developer to join our Front-End team"
+      
+    },
+    {
+        "jobTitle": "Back-End Software Developer Needed",
+        "jobDescription": "We are looking for an entry level software developer to join our Back-End team"
+        
     }
-]
+    
+  ]
