@@ -7,7 +7,12 @@ const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { typeDefs, resolvers } = require('./schemas');
+
 const Profile = require('./models/Profile');
+
+const path = require('path');
+
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
