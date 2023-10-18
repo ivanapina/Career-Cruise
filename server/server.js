@@ -7,7 +7,12 @@ const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { typeDefs, resolvers } = require('./schemas');
+
 const Profile = require('./models/Profile');
+
+const path = require('path');
+
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -74,6 +79,12 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+});
+
 
 const startApolloServer = async () => {
   await server.start();
@@ -85,7 +96,7 @@ const startApolloServer = async () => {
 
   db.once('open', () => {
     app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
+      console.log(`API server running on port http://localhost:${PORT}`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
