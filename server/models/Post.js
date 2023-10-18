@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const User  = require ("./User");
+const Profile  = require ("./Profile");
 
 const postSchema = new Schema({
     jobTitle: {
@@ -12,7 +12,7 @@ const postSchema = new Schema({
       type: String,
       required: true,
     },
-    //createdBy: [User.Schema]
+    //createdBy: [Profile.Schema]
   });
 
     
