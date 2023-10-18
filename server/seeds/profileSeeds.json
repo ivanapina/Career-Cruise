@@ -1,0 +1,15 @@
+[
+    {
+      "name": "Paysen Lund",
+      "email": "paysen@lundtech.com",
+      "password": "password01",
+      "company": true
+    },
+    {
+      "name": "Ivana Pina",
+      "email": "ivana@devmail.com",
+      "password": "password02",
+      "company": false
+    }
+    
+  ]
