@@ -1,38 +1,35 @@
 const typeDefs = `#graphql
-  type User {
-    _id: ID
-    firstName: String
-    email: String
-    github: String
-    linkedin: String
-    profile: Profiles
-  }
-
-  type Posts{
+  type Post{
     _id: ID 
+    jobTitle:String
+    jobDecription:String
+    createdBy: Profile
   }
 
-  type Profiles{
+  type Profile{
     _id: ID
-    bio: String
-    skills: [String]
+    name: String
+    email: String
+    password: String
+    company: Boolean
   }
   
   type Query {
-    users: [User]
-    posts: [Posts]
-    profiles: [Profiles]
+    posts: [Post]
+    profiles: [Profile]
+    post(id: ID!): Post
   }
 
   type Auth{
     toekn: ID!
-    user: User
+    profile: Profile
   }
 
   type Mutation {
-    addUser(firstName: String!,lastName: String!,email:String!,github:String!,linkedin:String!): Auth
+    addProfile(name:String!,email:String!,github:String!,linkedin:String!): Auth
     login(email:String!,password:String!): Auth
-    
+    addPost(jobTitle:String!,jobDecription: String!): Post
+    removePost(jobTitle:String!):Profile
   }
 `
 
