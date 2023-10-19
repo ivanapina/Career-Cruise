@@ -26,7 +26,7 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    addProfile(name:String!,email:String!,github:String!,linkedin:String!): Auth
+    addProfile(name:String!,email:String!,password:String!,company:Boolean!): Auth
     login(email:String!,password:String!): Auth
     addPost(jobTitle:String!,jobDecription: String!): Post
     removePost(jobTitle:String!):Profile

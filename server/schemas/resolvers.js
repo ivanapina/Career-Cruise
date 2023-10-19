@@ -49,6 +49,14 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+
+    addProfile: async (parent,{ name, email, password, company }) => {
+      const profile= await Profile.create({ name, email, password, company });
+      const token = signToken(profile);
+      return { token, profile}
+    },
+
+    
   },
 };
 
