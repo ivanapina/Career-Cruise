@@ -11,7 +11,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const Profile = require('./models/Profile');
 
 const path = require('path');
-
+const { authMiddleware } = require('./utils/auth');
 
 
 const PORT = process.env.PORT || 3001;
@@ -78,22 +78,31 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
+/*
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
-
-
+*/
 const startApolloServer = async () => {
   await server.start();
   
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   
-  app.use('/graphql', expressMiddleware(server));
+  app.use('/graphql', expressMiddleware(server,
+    { context: authMiddleware }
+  ));
+  
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
 
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    });
+  }
+  
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port http://localhost:${PORT}`);

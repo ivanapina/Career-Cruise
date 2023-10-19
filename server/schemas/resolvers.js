@@ -1,25 +1,27 @@
-const { Post } = require('../models');
+const { Post, Profile } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
-  Query: {
-    posts: async () => {
-      return Post.find();
+    Query: {
+        posts: async () => {
+            return await Post.find({});
+        },
+        profiles: async () => {
+            return await Profile.find({});
+        },
+        post: async (parent, { postId }) => {
+          return await Post.findOne({ _id: postId });
+        },
     },
-
-    post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
-    },
-
-  },
-
   Mutation: {
+    
     addPost: async (parent, { jobTitle, jobDescription }) => {
       const post = await Post.create({ jobTitle, jobDescription });
       const token = signToken(profile);
 
       return { token, post };
     },
+    
     login: async (parent, { email, password }) => {
       const profile = await Profile.findOne({ email });
 
@@ -37,16 +39,24 @@ const resolvers = {
       return { token, profile };
     },
    
-    removePost: async (parent, { post }, context) => {
+    removePost: async (parent, { jobTitle }, context) => {
       if (context.user) {
-        return Profile.findOneAndUpdate(
+        return Post.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { post: post } },
+          { $pull: { jobTitle: jobTitle } },
           { new: true }
         );
       }
       throw AuthenticationError;
     },
+
+    addProfile: async (parent,{ name, email, password, company }) => {
+      const profile= await Profile.create({ name, email, password, company });
+      const token = signToken(profile);
+      return { token, profile}
+    },
+
+    
   },
 };
 

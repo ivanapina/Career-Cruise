@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose;
-const Profile  = require ("./Profile");
+const {Schema, model } = require('mongoose');
 
 const postSchema = new Schema({
     jobTitle: {
@@ -12,10 +9,15 @@ const postSchema = new Schema({
       type: String,
       required: true,
     },
-    //createdBy: [Profile.Schema]
+    createdBy: [
+      {
+        type: Schema.Types.ObjectId,
+        ref:'Profile'
+      }
+    ]
   });
 
     
-const Post = mongoose.model('Post', postSchema);
+const Post = model('Post', postSchema);
 
 module.exports = Post;
