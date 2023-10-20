@@ -4,6 +4,7 @@ Career Cruse is a Job listing website that will be entry level friendly and have
 request on the website.
 
 ## Screenshot
+![Career Cruise](client/src/assets/images/app.png)
 
 ## Technologies Used
 
